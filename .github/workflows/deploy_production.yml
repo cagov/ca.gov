@@ -30,8 +30,8 @@ jobs:
       # Modify when site goes live.
       - name: Write robots.txt
         run: |
-          echo 'User-agent: *' > _dist/robots.txt
-          echo 'Disallow: /' >> _dist/robots.txt
+          echo 'User-agent: *' > _site/robots.txt
+          echo 'Disallow: /' >> _site/robots.txt
 
       - name: Deploy site to S3
         uses: jakejarvis/s3-sync-action@v0.5.1
