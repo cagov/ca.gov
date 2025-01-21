@@ -1,0 +1,54 @@
+name: Deploy Production
+on:
+  push:
+    branches:
+      - odi-drc-main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build site
+        run: |
+          mkdir _site
+          npm install
+          npm run build
+
+      # Modify when site goes live.
+      - name: Write robots.txt
+        run: |
+          echo 'User-agent: *' > _dist/robots.txt
+          echo 'Disallow: /' >> _dist/robots.txt
+
+      - name: Deploy site to S3
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: "digital-drc"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-west-1"
+          SOURCE_DIR: ./_site
+
+      - name: Invalidate Cloudfront cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: "E1VH2HFYPIFSJ4"
+          PATHS: "/*"
+          AWS_REGION: "us-west-1"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
