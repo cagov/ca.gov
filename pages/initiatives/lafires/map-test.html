@@ -1,0 +1,77 @@
+---
+title: Map test
+landing: Support
+layout: landing
+description: Map interface test
+hidestatewidealert: true
+permalink: lafires/map-test/
+breadcrumbparent: 2025 Los Angeles Fires
+---
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+<style>
+  #map {
+    height: 512px; // 720px;
+    // width: 660px;
+    width: 100%;
+    z-index: 0;
+  }
+  #map-credits {
+    text-align: right;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+
+  #credits-tooltip {
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  .leaflet-container .leaflet-marker-pane img,
+  .leaflet-container .leaflet-shadow-pane img,
+  .leaflet-container .leaflet-tile-pane img,
+  .leaflet-container img.leaflet-image-layer,
+  .leaflet-container .leaflet-tile {
+    background-color: transparent;
+  }
+  .leaflet-popup-tip-container,
+  .leaflet-left {
+    background-color: transparent;
+  }
+</style>
+<div
+  class="section-understated lineart bg-s1"
+  style="background: url('/images/get-help-lineart.svg?v2') no-repeat right / auto;">
+  <div class="container p-y-md">
+    {%- include "breadcrumbs.html" -%}
+    <h1 class="m-t-0 color-p2-darker">{{title}}</h1>
+    <p class="subtitle color-p2 bold">2025 Los Angeles Fires</p>
+  </div>
+</div>
+
+<div class="container p-y-lg">
+  <div class="row">
+    <div class="col-lg-3">
+      <nav aria-label="list navigation" class="side-navigation">
+        <ul>
+          <li>
+            <a href="/lafires/" class="landing back"
+              >Back to 2025 Los Angeles Fires</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="col-lg-9">
+      <cagov-lafires-map></cagov-lafires-map>
+    </div>
+  </div>
+</div>
+<script>
+  console.log("map test");
+</script>
