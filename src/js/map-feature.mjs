@@ -128,7 +128,6 @@ export class CaGovLAFiresMap extends window.HTMLElement {
       <div id="map-popup" class="provider-card popup">
         <!-- begin placeholder -->
         <div class="provider-card-container">
-          <h2 class="h4">Sample popup</h2>
         </div>
         <!-- end placeholder -->
       </div>
