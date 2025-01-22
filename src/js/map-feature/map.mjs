@@ -1,3 +1,5 @@
+const L = require("leaflet");
+
 const tile_template =
   "https://d1436ootlg562q.cloudfront.net/tiles/calstamen/{z}/{x}/{y}{r}.png";
 // use for debugging
