@@ -21,6 +21,9 @@ module.exports = function (
     "src/docs": "docs",
     "src/root": "/"
   });
+  eleventyConfig.addPassthroughCopy({
+    "src/js/map-feature/leaflet/images": "images",
+  });
 
   eleventyConfig.addWatchTarget("./src/js/");
 
